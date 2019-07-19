@@ -53,7 +53,7 @@ testPathIgnorePatterns：jest忽略匹配的文件
 2、	Enzyme有shallow，mount，render创建dom对象之后，可以有类似于JQuery的方法，具体的操作dom
 3、	Mocha提供断言的方法，describe，it 方法, 没有test方法
  
-4、	Jest提供断言的方法，describe，it 方法, 也有test方法, 果然Jest后来者居上
+4、	Jest提供断言的方法，describe，it 方法, 也有test方法, 果然 Jest后来者居上
 
 
 
