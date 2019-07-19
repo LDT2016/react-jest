@@ -21,7 +21,7 @@ describe('Enzyme Test', function () {
         expect(buttonObj.text()).toBe(name);
       });
 
-      test('Example find span text in SubExample component - mount', function () {
+      it('Example find span text in SubExample component - mount', ()=> {
         const app = mount(<Example text={name} />);
         const buttonObj=app.find('button');
         const spanObj=app.find('span');
@@ -33,15 +33,15 @@ describe('Enzyme Test', function () {
       });
 
 
-      // it('Example find span text in SubExample component - render', function () {
-      //   const app = render(<Example text={name} />);
-      //   const buttonObj=app.find('button');
-      //   const spanObj=app.find('span');
+      it('Example find span text in SubExample component - render', function () {
+        const app = render(<Example text={name} />);
+        const buttonObj=app.find('button');
+        const spanObj=app.find('span');
     
-      //   console.info(`button count: ${buttonObj.length}`);
-      //   console.info(`span count:${spanObj.length}`);
+        console.info(`button count: ${buttonObj.length}`);
+        console.info(`span count:${spanObj.length}`);
     
-      //   expect(buttonObj.text()).to.equal(spanObj.text());
-      // });
+        expect(buttonObj.text()).toBe(spanObj.text());
+      });
 })
 
