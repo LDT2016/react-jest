@@ -3,3 +3,4 @@ node_modules
 package-lock.json
 src/__tests__/__snapshots__
 coverage
+build

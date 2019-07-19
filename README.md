@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Jest+React+Enzyme [react-jest demo](https://github.com/LDT2016/react-jest
 
-## Available Scripts
+# 安装 enzyme 相关
 
-In the project directory, you can run:
+npm install enzyme --save-dev
+npm install enzyme-adapter-react-16 --save-dev
+npm install jest --save-dev
+npm install babel-jest --save-dev
+npm install babel-preset-env --save-dev
+npm install react-test-renderer --save-dev 
+npm install enzyme-to-json --save-dev
 
-### `npm start`
+## 修改package.json
+```
+"test": "jest --notify --watchman=false",
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+这里强调记录下，为什么要加--watchman=false，因为在国内watchman连接的会会超时，别问我怎么知道的，我可以给你解释102个小时，反正在国内的话就按照我说的这个来，不然，你会和郁闷
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## jest.setup.js
 
-### `npm test`
+### 添加jest.config.js
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npx jest –init
+```
+生成jest.config.js
 
-### `npm run build`
+可以看到jest缺省把测试用例放到__test__文件夹，也是为了testMatch的节点配置，
+testMatch： jest验证匹配的文件
+testPathIgnorePatterns：jest忽略匹配的文件
+找到以上节点，打开注释
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+.babelrc 配置
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ]
+}
+```
+ 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+# 使用Enzyme时候与mocha的区别
+1、	Enzyme提供创建Dom的方法shallow，mount，render（三种有区别可见Enzyme的介绍）
+2、	Enzyme有shallow，mount，render创建dom对象之后，可以有类似于JQuery的方法，具体的操作dom
+3、	Mocha提供断言的方法，describe，it 方法, 没有test方法
+ 
+4、	Jest提供断言的方法，describe，it 方法, 也有test方法, 果然Jest后来者居上
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
