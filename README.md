@@ -52,7 +52,7 @@ module.exports = {
 ```
  
 
-# 使用Enzyme时候与mocha的区别
+# _**`使用Enzyme时候与mocha的区别`**_
 * Enzyme提供创建Dom的方法shallow，mount，render（三种有区别可见Enzyme的介绍）
 * Enzyme有shallow，mount，render创建dom对象之后，可以有类似于JQuery的方法，具体的操作dom
 * Mocha提供断言的方法，describe，it 方法, 没有test方法

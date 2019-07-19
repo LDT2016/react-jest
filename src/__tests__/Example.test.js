@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import Example from '../Example';
+import Example from '../components/Example';
 
 const {shallow,mount,render}=Enzyme;
 
