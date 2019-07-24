@@ -60,4 +60,166 @@ module.exports = {
 * Jest提供断言的方法，describe，it 方法, 也有test方法, 果然 Jest后来者居上
 
 
+# Setup and Teardown
+## 钩子函数，在做Test Case的数据初始化等操作
+```
+beforeAll(() => console.log('1 - beforeAll'));
+afterAll(() => console.log('1 - afterAll'));
+beforeEach(() => console.log('1 - beforeEach'));
+afterEach(() => console.log('1 - afterEach'));
+test('', () => console.log('1 - test'));
+describe('Scoped / Nested block', () => {
+  beforeAll(() => console.log('2 - beforeAll'));
+  afterAll(() => console.log('2 - afterAll'));
+  beforeEach(() => console.log('2 - beforeEach'));
+  afterEach(() => console.log('2 - afterEach'));
+  test('', () => console.log('2 - test'));
+});
 
+// 1 - beforeAll
+// 1 - beforeEach  //beforeEach 1 
+// 1 - test
+// 1 - afterEach
+// 2 - beforeAll
+// 1 - beforeEach  //beforeEach 2
+// 2 - beforeEach
+// 2 - test
+// 2 - afterEach   //afterEach 1
+// 1 - afterEach   //afterEach 2
+// 2 - afterAll    //afterAll 2
+// 1 - afterAll    //afterAll 2
+```
+
+`Note`
+* the `top-level` `before`Each is executed before the `before`Each `inside` the describe block
+* the `inside` `after`Each is executed before the `after`before Each `top-level` the describe block
+  
+#  Matchers（匹配器）介绍
+* ## 相等匹配，这是我们最常用的匹配规则　
+
+```
+.toBe() \\值判断
+.not.toBe() \\值判断
+.toEaqual() \\对象判断
+.not.toEaqual() \\对象判断
+```
+```
+test('two plus two is four', () => {
+  expect(2 + 2).toBe(4);
+});
+```
+```
+test('object assignment', () => {
+  const data = {one: 1};
+  data['two'] = 2;
+  expect(data).toEqual({one: 1, two: 2});
+});
+```
+```
+test('adding positive numbers is not zero', () => {
+  for (let a = 1; a < 10; a++) {
+    for (let b = 1; b < 10; b++) {
+      expect(a + b).not.toBe(0);
+    }
+  }
+});
+```
+
+* ## 真实性匹配，比如：对象是否为null，集合是否为空等等
+
+  ### 在测试中，您有时需要区分undefined、null和false，但有时希望以不同的方式处理这些问题，Jest帮助你明确您想要什么。比如：
+  * toBeNull 仅当expect返回对象为 null
+  * toBeUndefined 仅当返回为 undefined
+  * toBeDefined 和上面的刚好相反，对象如果有定义时
+  * toBeTruthy 匹配任何返回结果为true
+  * toBeFalsy 匹配任何返回结果为false
+
+
+```
+test('null', () => {
+  const n = null;
+  expect(n).toBeNull();
+  expect(n).toBeDefined();
+  expect(n).not.toBeUndefined();
+  expect(n).not.toBeTruthy();
+  expect(n).toBeFalsy();
+});
+```
+```
+test('zero', () => {
+  const z = 0;
+  expect(z).not.toBeNull();
+  expect(z).toBeDefined();
+  expect(z).not.toBeUndefined();
+  expect(z).not.toBeTruthy();
+  expect(z).toBeFalsy();
+});
+
+```
+
+* ## 数字大小的比较
+  ```
+  test('two plus two', () => {
+    const value = 2 + 2;
+    expect(value).toBeGreaterThan(3);
+    expect(value).toBeGreaterThanOrEqual(3.5);
+    expect(value).toBeLessThan(5);
+    expect(value).toBeLessThanOrEqual(4.5);
+
+    // toBe and toEqual are equivalent for numbers
+    expect(value).toBe(4);
+    expect(value).toEqual(4);
+  });
+
+  ```
+  ```
+  test('adding floating point numbers', () => {
+    const value = 0.1 + 0.2;
+    //expect(value).toBe(0.3);  This won't work because of rounding error
+    expect(value).toBeCloseTo(0.3); // This works.
+  });
+  ```
+  `float类型的浮点数计算的时候，需要使用toBeCloseTo而不是 toEqual ，因为避免细微的四舍五入引起额外的问题`
+
+
+* ## 字符串的匹配
+  
+  ```
+  test('there is no I in team', () => {
+    expect('team').not.toMatch(/I/);
+  });
+
+  test('but there is a "stop" in Christoph', () => {
+    expect('Christoph').toMatch(/stop/);
+  });
+  ```
+* ## 数组类型匹配
+  ```
+  const shoppingList = [
+    'diapers',
+    'kleenex',
+    'trash bags',
+    'paper towels',
+    'beer',
+  ];
+
+  test('the shopping list has beer on it', () => {
+    expect(shoppingList).toContain('beer');
+  }); 
+  ```
+
+* ## 异常匹配
+  ```
+  function compileAndroidCode() {
+    throw new Error('you are using the wrong JDK');
+  }
+
+  test('compiling android goes as expected', () => {
+    expect(compileAndroidCode).toThrow();
+    expect(compileAndroidCode).toThrow(Error);
+
+    // You can also use the exact error message or a regexp
+    expect(compileAndroidCode).toThrow('you are using the wrong JDK');
+    expect(compileAndroidCode).toThrow(/JDK/);
+  });
+  ```
