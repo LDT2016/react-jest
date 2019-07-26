@@ -223,3 +223,12 @@ test('zero', () => {
     expect(compileAndroidCode).toThrow(/JDK/);
   });
   ```
+
+
+  # `jsdom和manual_mock冲突，在Enzyme.mount()运行之前，需要使用jsdom模拟一个真实的DOM的环境`
+
+  # 为什么要使用Enzyme.mount()？
+    1. Shallow Rendering（浅渲染）指的是，将一个组件渲染成虚拟DOM对象，但是只渲染第一层，不渲染所有子组件，所以处理速度非常快。它不需要DOM（jsdom）环境，因为根本没有加载进DOM。
+    2. 相对潜渲染，mount需要DOM（jsdom）环境
+    3. render会根据react组件生成一个静态html文本，并且分析生成的html结构，需要第三方的html解析库Cheerio去生成一个类似于mount和shallow得到的封装对象。
+    4. render和mount的区别就是render可以不需要jsdom去模拟一个真实dom环境，执行效率来说，mount要高一些
