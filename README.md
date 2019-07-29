@@ -232,3 +232,11 @@ test('zero', () => {
     2. 相对潜渲染，mount需要DOM（jsdom）环境
     3. render会根据react组件生成一个静态html文本，并且分析生成的html结构，需要第三方的html解析库Cheerio去生成一个类似于mount和shallow得到的封装对象。
     4. render和mount的区别就是render可以不需要jsdom去模拟一个真实dom环境，执行效率来说，mount要高一些
+
+
+
+
+```
+npm install redux-mock-store --save-dev
+npm install nock --save-dev
+```

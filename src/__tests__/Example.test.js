@@ -21,16 +21,16 @@ describe('Enzyme Test', function () {
         expect(buttonObj.text()).toBe(name);
       });
 
-      it('Example find span text in SubExample component - mount', ()=> {
-        const app = mount(<Example text={name} />);
-        const buttonObj=app.find('button');
-        const spanObj=app.find('span');
+      // it('Example find span text in SubExample component - mount', ()=> {
+      //   const app = mount(<Example text={name} />);
+      //   const buttonObj=app.find('button');
+      //   const spanObj=app.find('span');
     
-        console.info(`button count: ${buttonObj.length}`);
-        console.info(`span count:${spanObj.length}`);
+      //   console.info(`button count: ${buttonObj.length}`);
+      //   console.info(`span count:${spanObj.length}`);
     
-        expect(buttonObj.text()).toBe(spanObj.text());
-      });
+      //   expect(buttonObj.text()).toBe(spanObj.text());
+      // });
 
 
       it('Example find span text in SubExample component - render', function () {

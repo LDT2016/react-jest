@@ -1,14 +1,31 @@
 import React from 'react';
 // import logo from './logo.svg';
-import Link from './Link.react'
 import './App.css';
+import { connect } from "react-redux";
+import "./App.css";
+import Man from "./components/man";
+import Woman from "./components/woman";
 
 function App() {
   return (
     <div className="App">
-      <Link page="http://www.baidu.com">Baidu</Link>
+      <Man title="Adam" friend="Grace" />
+      <Woman title="Grace" friend="Adam" />
+      <demo1 />
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    destory: state.man.destory
+  };
+};
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
