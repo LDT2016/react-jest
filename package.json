@@ -16,7 +16,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.7.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "nock": "^10.0.6",
     "react-redux": "^7.1.0",
     "react-test-renderer": "^16.8.6",
